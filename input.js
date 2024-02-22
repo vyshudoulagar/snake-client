@@ -1,8 +1,9 @@
+const { keys } = require("./constants"); //importing keys object from constants
 
 let connection;
 
 const setupInput = (conn) => {
-    connection = conn;
+    connection = conn;  //assigning conn value to global connection
     const stdin = process.stdin;
     stdin.setRawMode(true);
     stdin.setEncoding("utf8");
@@ -11,19 +12,12 @@ const setupInput = (conn) => {
     return stdin;
 };
 
-const keys = {
-    'w': "Move: up",
-    'a': "Move: left",
-    's': "Move: down",
-    'd': "Move: right"
-};
-
 const handleUserInput = (key) => {
-    if(key === '\u0003') {
+    if (key === '\u0003') {
         process.exit();
     }
-    if(keys[key]) {
-        connection.write(keys[key]);
+    if (keys[key]) {   // checking if keys object contains the key
+        connection.write(keys[key]);  // sending the key value to server
     }
 };
 
